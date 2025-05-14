@@ -9,7 +9,6 @@ import {
   Priority,
   Task,
   useGetAuthUserQuery,
-  //useGetAuthUserQuery,
   useGetTasksByUserQuery,
 } from "@/src/state/api";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -159,5 +158,3 @@ const ReusablePriorityPage = ({ priority }: Props) => {
 };
 
 export default ReusablePriorityPage;
-
-
