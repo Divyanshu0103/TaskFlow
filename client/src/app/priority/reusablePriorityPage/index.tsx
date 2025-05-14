@@ -8,6 +8,7 @@ import { dataGridClassNames, dataGridSxStyles } from "@/src/lib/utils";
 import {
   Priority,
   Task,
+  useGetAuthUserQuery,
   //useGetAuthUserQuery,
   useGetTasksByUserQuery,
 } from "@/src/state/api";
@@ -77,20 +78,15 @@ const ReusablePriorityPage = ({ priority }: Props) => {
   const [view, setView] = useState("list");
   const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
 
-  const userId = 1;
-  const {data: tasks, isLoading, isError: isTasksError} = useGetTasksByUserQuery(1, {
-    skip: userId === null
-  })
-
-//   const { data: currentUser } = useGetAuthUserQuery({});
-//   const userId = currentUser?.userDetails?.userId ?? null;
-//   const {
-//     data: tasks,
-//     isLoading,
-//     isError: isTasksError,
-//   } = useGetTasksByUserQuery(userId || 0, {
-//     skip: userId === null,
-//   });
+  const { data: currentUser } = useGetAuthUserQuery({});
+  const userId = currentUser?.userDetails?.userId ?? null;
+  const {
+    data: tasks,
+    isLoading,
+    isError: isTasksError,
+  } = useGetTasksByUserQuery(userId || 0, {
+    skip: userId === null,
+  });
 
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
